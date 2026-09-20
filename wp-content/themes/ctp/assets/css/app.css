@@ -454,9 +454,16 @@ code, pre {
 
 .nav > ul > li { position: relative; }
 
-.nav a {
+/* Scoped to top-level links only.
+ *
+ * A bare `.nav a` is specificity (0,1,1), which quietly outranks every
+ * single-class rule inside the nav — .btn--primary, .mega__aside-link and so
+ * on — and repaints them charcoal. The mega panels live inside .nav and carry
+ * their own components, so the nav's own link styling has to stay in its lane. */
+.nav > ul > li > a {
 	display: flex;
 	align-items: center;
+	padding-block: 1.6rem;
 	color: var(--ink-2);
 	font-size: var(--fs-sm);
 	font-weight: 500;
@@ -466,9 +473,17 @@ code, pre {
 	transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-.nav > ul > li > a { padding-block: 1.6rem; }
+.nav > ul > li > a:hover { color: var(--ink); }
 
-.nav a:hover { color: var(--ink); }
+/* Plain submenu links; the media queries below add layout on top. */
+.nav .sub-menu a {
+	color: var(--ink-2);
+	font-size: var(--fs-sm);
+	text-decoration: none;
+	transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.nav .sub-menu a:hover { color: var(--brand-600); }
 
 .nav > ul > .current-menu-item > a,
 .nav > ul > .current_page_item > a,
@@ -525,7 +540,7 @@ code, pre {
 }
 
 .mega__aside-text {
-	margin-bottom: var(--sp-4);
+	margin-bottom: var(--sp-5);
 	color: var(--muted);
 	font-size: var(--fs-xs);
 	line-height: 1.6;
@@ -544,6 +559,10 @@ code, pre {
 }
 
 .mega__aside-link:hover { color: var(--brand-700); }
+
+/* Only when the link follows the CTA button — in the Areas panel it sits
+   straight after the paragraph, which already has its own spacing. */
+.mega__aside .btn + .mega__aside-link { margin-top: var(--sp-4); }
 
 /* --- Desktop navigation -------------------------------------------------- */
 
@@ -1759,18 +1778,93 @@ label {
 .search-form { display: flex; gap: 0.5rem; }
 .search-form label { flex: 1; margin: 0; }
 
-/* Fluent Forms: nudge it toward the theme without fighting the plugin. */
+/* --- Fluent Forms ------------------------------------------------------- */
+
+/* The plugin ships its own typeface stack, a #dadbdd input border and a blue
+ * accent. The border is the one that actually matters: at 1.3:1 against white
+ * it fails WCAG 1.4.11 for a UI component boundary, so it is replaced with the
+ * same --field token the theme's own inputs use (3.87:1).
+ *
+ * !important is load-order, not preference — the plugin's stylesheet enqueues
+ * after the theme's. */
+
+.fluentform .ff-el-group { margin-bottom: var(--sp-5); }
+
+.fluentform .ff-el-input--label label {
+	font-family: var(--font);
+	font-size: var(--fs-sm);
+	font-weight: 600 !important;
+	color: var(--ink);
+}
+
+/* Required marker in the brand clay rather than the plugin's alert red.
+ *
+ * The plugin paints it with var(--fluentform-danger) from a four-class
+ * selector, so out-specifying it means an arms race. Redefining the variable
+ * on the label wrapper instead wins on inheritance proximity — the nearest
+ * ancestor that sets a custom property supplies it — and it leaves genuine
+ * validation errors on their own red, which should stay distinct from a
+ * decorative required marker. */
+.fluentform .ff-el-input--label.ff-el-is-required { --fluentform-danger: var(--brand); }
+
+.fluentform .ff-el-form-control {
+	font-family: var(--font) !important;
+	font-size: var(--fs-sm) !important;
+	min-height: 46px;
+	padding: 0.7rem 0.85rem !important;
+	border: 1px solid var(--field) !important;
+	border-radius: var(--r-sm) !important;
+	color: var(--ink) !important;
+	background: var(--bg) !important;
+}
+
+.fluentform .ff-el-form-control:focus {
+	outline: none;
+	border-color: var(--brand) !important;
+	box-shadow: 0 0 0 3px rgba(158, 58, 32, 0.16) !important;
+}
+
+.fluentform textarea.ff-el-form-control { min-height: 8.5rem; }
+
+/* The fill sits on the path, not the svg, so targeting the svg alone misses. */
+.fluentform .ff-el-tooltip svg path { fill: var(--muted-2); }
+.fluentform .ff-el-tooltip:hover svg path { fill: var(--brand); }
+
+.fluentform .ff-el-help-message {
+	color: var(--muted);
+	font-size: var(--fs-xs);
+	font-family: var(--font);
+}
+
+.fluentform .text-danger,
+.fluentform .error-text {
+	color: var(--brand-700);
+	font-size: var(--fs-xs);
+	font-family: var(--font);
+}
+
 .fluentform .ff-btn-submit {
+	font-family: var(--font) !important;
 	background: var(--brand) !important;
 	border-color: var(--brand) !important;
 	border-radius: var(--r-sm) !important;
+	color: #fff !important;
+	font-size: var(--fs-base) !important;
 	font-weight: 600 !important;
-	padding: 0.9rem 1.8rem !important;
-	min-height: 48px;
+	min-height: 52px;
+	padding: 0.95rem 1.85rem !important;
 }
 
 .fluentform .ff-btn-submit:hover { background: var(--brand-600) !important; }
-.fluentform .ff-el-form-control { border-radius: var(--r-sm) !important; }
+
+.fluentform .ff-btn-submit:focus-visible {
+	outline: 2px solid var(--focus);
+	outline-offset: 2px;
+}
+
+/* The form sits inside a .panel on the contact page; the stone panel plus the
+   plugin's own white inputs already separate it, so drop the inner card. */
+.panel > .fluentform .ff-el-group:last-of-type { margin-bottom: 0; }
 
 /* --- 22. Footer --------------------------------------------------------- */
 

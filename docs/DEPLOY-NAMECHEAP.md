@@ -125,20 +125,33 @@ Image optimization is worth switching on before you upload photos. It converts t
 
 ### Fluent Forms — the contact form
 
-1. **Plugins → Add New**, search **Fluent Forms**, install, activate.
-2. Build a form. Suggested fields:
-   - Name (required)
-   - Phone (required)
-   - Email (required)
-   - Address or town
-   - What can we help with? (dropdown — populate it with the service names)
-   - Tell us what you're seeing (textarea)
-   - Photo upload (optional, but very useful)
-3. In the form's **Settings → Confirmation**, redirect to the **Thank You** page the importer created.
-4. In **Settings → Email Notifications**, send to the business email.
-5. Copy the form shortcode, then go to **Appearance → Customize → Contact Form** and paste it in.
+The form is already built. It lives in the database rather than in the repo, so it travels as a JSON export: **`tools/fluentform-estimate-request.json`**.
 
-Until you do that last step, the contact page shows a clear notice instead of a form, so nothing looks broken.
+1. **Plugins → Add New**, search **Fluent Forms**, install, activate.
+2. **Fluent Forms → Tools → Import Forms**, upload `tools/fluentform-estimate-request.json`.
+3. Open the imported form and copy its shortcode — the ID will differ from the local one.
+4. **Appearance → Customize → Contact Form**, paste the shortcode in.
+5. **Settings → Email Notifications** on the form: confirm the "send to" address is the real business email. The export carries whatever was in Business Info at export time.
+6. **Settings → Confirmation**: confirm it redirects to the **Thank You** page. Page IDs change between installs, so re-pick it from the dropdown.
+
+Steps 5 and 6 are the two that do not survive an import cleanly, because both reference IDs that are specific to an install. Check them.
+
+Until step 4 is done the contact page shows a clear notice instead of a form, so nothing looks broken.
+
+**What the form asks for:**
+
+| Field | Required | Why |
+|---|---|---|
+| First / last name | First only | Lower friction than demanding both |
+| Phone | Yes | The fastest way to reach someone about masonry work |
+| Email | Yes | Needed to send the written estimate |
+| Town or ZIP | Yes | Confirms they are inside the service area before anyone drives out |
+| What can we help with? | No | Dropdown of all ten services plus "Not sure — please take a look" |
+| Tell us what you are seeing | Yes | Help text prompts for house age, previous repointing, and water inside |
+
+The notification email subject is `Estimate request: {service} in {town}`, and reply-to is set to the submitter, so hitting reply in the inbox goes straight back to the customer.
+
+**No photo upload field.** File and image upload are paid features in Fluent Forms. The message field's help text asks people to email photos instead, which costs nothing and works.
 
 ---
 

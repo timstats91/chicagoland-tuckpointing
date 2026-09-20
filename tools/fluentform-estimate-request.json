@@ -1,0 +1,469 @@
+[
+    {
+        "id": 3,
+        "title": "Free Estimate Request",
+        "status": "published",
+        "appearance_settings": null,
+        "form_fields": {
+            "fields": [
+                {
+                    "index": 0,
+                    "element": "input_name",
+                    "attributes": {
+                        "name": "names",
+                        "data-type": "name-element"
+                    },
+                    "settings": {
+                        "container_class": "",
+                        "admin_field_label": "Name",
+                        "conditional_logics": [],
+                        "label": "Your name"
+                    },
+                    "fields": {
+                        "first_name": {
+                            "element": "input_text",
+                            "attributes": {
+                                "type": "text",
+                                "name": "first_name",
+                                "value": "",
+                                "id": "",
+                                "class": "",
+                                "placeholder": ""
+                            },
+                            "settings": {
+                                "container_class": "",
+                                "label": "First name",
+                                "help_message": "",
+                                "visible": true,
+                                "validation_rules": {
+                                    "required": {
+                                        "value": true,
+                                        "message": "Please tell us your first name.",
+                                        "global_message": "Please tell us your first name.",
+                                        "global": false
+                                    }
+                                },
+                                "conditional_logics": []
+                            },
+                            "editor_options": {
+                                "template": "inputText"
+                            }
+                        },
+                        "middle_name": {
+                            "element": "input_text",
+                            "attributes": {
+                                "type": "text",
+                                "name": "middle_name",
+                                "value": "",
+                                "id": "",
+                                "class": "",
+                                "placeholder": "",
+                                "required": false
+                            },
+                            "settings": {
+                                "container_class": "",
+                                "label": "Middle Name",
+                                "help_message": "",
+                                "error_message": "",
+                                "visible": false,
+                                "validation_rules": {
+                                    "required": {
+                                        "value": false,
+                                        "message": "This field is required",
+                                        "global": true
+                                    }
+                                },
+                                "conditional_logics": []
+                            },
+                            "editor_options": {
+                                "template": "inputText"
+                            }
+                        },
+                        "last_name": {
+                            "element": "input_text",
+                            "attributes": {
+                                "type": "text",
+                                "name": "last_name",
+                                "value": "",
+                                "id": "",
+                                "class": "",
+                                "placeholder": "",
+                                "required": false
+                            },
+                            "settings": {
+                                "container_class": "",
+                                "label": "Last name",
+                                "help_message": "",
+                                "error_message": "",
+                                "visible": true,
+                                "validation_rules": {
+                                    "required": {
+                                        "value": false,
+                                        "message": "Please tell us your first name.",
+                                        "global_message": "Please tell us your first name.",
+                                        "global": false
+                                    }
+                                },
+                                "conditional_logics": []
+                            },
+                            "editor_options": {
+                                "template": "inputText"
+                            }
+                        }
+                    },
+                    "editor_options": {
+                        "title": "Name Fields",
+                        "element": "name-fields",
+                        "icon_class": "ff-edit-name",
+                        "template": "nameFields"
+                    },
+                    "uniqElKey": "ctp_name_52342f40"
+                },
+                {
+                    "index": 1,
+                    "element": "input_text",
+                    "attributes": {
+                        "type": "tel",
+                        "name": "phone",
+                        "value": "",
+                        "class": "",
+                        "placeholder": ""
+                    },
+                    "settings": {
+                        "container_class": "",
+                        "label": "Phone",
+                        "label_placement": "",
+                        "admin_field_label": "Phone",
+                        "help_message": "The fastest way to reach you.",
+                        "validation_rules": {
+                            "required": {
+                                "value": true,
+                                "message": "A phone number lets us call you back the same day.",
+                                "global_message": "A phone number lets us call you back the same day.",
+                                "global": false
+                            }
+                        },
+                        "conditional_logics": {
+                            "type": "any",
+                            "status": false,
+                            "conditions": [
+                                {
+                                    "field": "",
+                                    "value": "",
+                                    "operator": ""
+                                }
+                            ]
+                        }
+                    },
+                    "editor_options": {
+                        "title": "Simple Text",
+                        "icon_class": "ff-edit-text",
+                        "template": "inputText"
+                    },
+                    "uniqElKey": "ctp_phone_ebf9ed3d"
+                },
+                {
+                    "index": 2,
+                    "element": "input_email",
+                    "attributes": {
+                        "type": "email",
+                        "name": "email",
+                        "value": "",
+                        "id": "",
+                        "class": "",
+                        "placeholder": ""
+                    },
+                    "settings": {
+                        "container_class": "",
+                        "label": "Email",
+                        "label_placement": "",
+                        "help_message": "",
+                        "admin_field_label": "Email",
+                        "validation_rules": {
+                            "required": {
+                                "value": true,
+                                "message": "Please add an email so we can send the written estimate.",
+                                "global_message": "Please add an email so we can send the written estimate.",
+                                "global": false
+                            },
+                            "email": {
+                                "value": true,
+                                "message": "This field must contain a valid email",
+                                "global": true
+                            }
+                        },
+                        "conditional_logics": []
+                    },
+                    "editor_options": {
+                        "title": "Email Address",
+                        "icon_class": "ff-edit-email",
+                        "template": "inputText"
+                    },
+                    "uniqElKey": "ctp_email_574ac802"
+                },
+                {
+                    "index": 3,
+                    "element": "input_text",
+                    "attributes": {
+                        "type": "text",
+                        "name": "town",
+                        "value": "",
+                        "class": "",
+                        "placeholder": ""
+                    },
+                    "settings": {
+                        "container_class": "",
+                        "label": "Town or ZIP code",
+                        "label_placement": "",
+                        "admin_field_label": "Town",
+                        "help_message": "So we can confirm you are inside our service area.",
+                        "validation_rules": {
+                            "required": {
+                                "value": true,
+                                "message": "Let us know which town the property is in.",
+                                "global_message": "Let us know which town the property is in.",
+                                "global": false
+                            }
+                        },
+                        "conditional_logics": {
+                            "type": "any",
+                            "status": false,
+                            "conditions": [
+                                {
+                                    "field": "",
+                                    "value": "",
+                                    "operator": ""
+                                }
+                            ]
+                        }
+                    },
+                    "editor_options": {
+                        "title": "Simple Text",
+                        "icon_class": "ff-edit-text",
+                        "template": "inputText"
+                    },
+                    "uniqElKey": "ctp_town_e6dc0947"
+                },
+                {
+                    "index": 4,
+                    "element": "select",
+                    "attributes": {
+                        "name": "service",
+                        "value": "",
+                        "id": "",
+                        "class": ""
+                    },
+                    "settings": {
+                        "dynamic_default_value": "",
+                        "label": "What can we help with?",
+                        "admin_field_label": "Service",
+                        "help_message": "",
+                        "container_class": "",
+                        "label_placement": "",
+                        "placeholder": "- Select -",
+                        "advanced_options": [
+                            {
+                                "label": "Tuckpointing & Repointing",
+                                "value": "Tuckpointing & Repointing",
+                                "calc_value": ""
+                            },
+                            {
+                                "label": "Brick & Masonry Repair",
+                                "value": "Brick & Masonry Repair",
+                                "calc_value": ""
+                            },
+                            {
+                                "label": "Chimney Repair & Rebuilds",
+                                "value": "Chimney Repair & Rebuilds",
+                                "calc_value": ""
+                            },
+                            {
+                                "label": "Caulking & Sealant Replacement",
+                                "value": "Caulking & Sealant Replacement",
+                                "calc_value": ""
+                            },
+                            {
+                                "label": "Patio, Paver & Walkway Rebuilds",
+                                "value": "Patio, Paver & Walkway Rebuilds",
+                                "calc_value": ""
+                            },
+                            {
+                                "label": "Lintel Replacement",
+                                "value": "Lintel Replacement",
+                                "calc_value": ""
+                            },
+                            {
+                                "label": "Step & Stoop Rebuilds",
+                                "value": "Step & Stoop Rebuilds",
+                                "calc_value": ""
+                            },
+                            {
+                                "label": "Stone & Limestone Restoration",
+                                "value": "Stone & Limestone Restoration",
+                                "calc_value": ""
+                            },
+                            {
+                                "label": "Masonry Cleaning & Power Washing",
+                                "value": "Masonry Cleaning & Power Washing",
+                                "calc_value": ""
+                            },
+                            {
+                                "label": "Masonry Waterproofing",
+                                "value": "Masonry Waterproofing",
+                                "calc_value": ""
+                            },
+                            {
+                                "label": "Not sure — please take a look",
+                                "value": "Not sure",
+                                "calc_value": ""
+                            },
+                            {
+                                "label": "Something else",
+                                "value": "Something else",
+                                "calc_value": ""
+                            }
+                        ],
+                        "calc_value_status": false,
+                        "enable_image_input": false,
+                        "values_visible": false,
+                        "enable_option_groups": "no",
+                        "enable_select_2": "no",
+                        "validation_rules": {
+                            "required": {
+                                "value": false,
+                                "message": "This field is required",
+                                "global_message": "This field is required",
+                                "global": true
+                            }
+                        },
+                        "conditional_logics": [],
+                        "randomize_options": "no"
+                    },
+                    "editor_options": {
+                        "title": "Dropdown",
+                        "icon_class": "ff-edit-dropdown",
+                        "element": "select",
+                        "template": "select"
+                    },
+                    "uniqElKey": "ctp_service_4be046e8"
+                },
+                {
+                    "index": 5,
+                    "element": "textarea",
+                    "attributes": {
+                        "name": "message",
+                        "value": "",
+                        "id": "",
+                        "class": "",
+                        "placeholder": "",
+                        "rows": 5,
+                        "cols": 2
+                    },
+                    "settings": {
+                        "container_class": "",
+                        "label": "Tell us what you are seeing",
+                        "admin_field_label": "Message",
+                        "label_placement": "",
+                        "help_message": "Roughly when the house was built, whether it has been repointed before, and whether you are seeing water inside all help. Photos are welcome by email.",
+                        "validation_rules": {
+                            "required": {
+                                "value": true,
+                                "message": "A sentence or two about the problem helps us quote accurately.",
+                                "global_message": "A sentence or two about the problem helps us quote accurately.",
+                                "global": false
+                            }
+                        },
+                        "conditional_logics": {
+                            "type": "any",
+                            "status": false,
+                            "conditions": [
+                                {
+                                    "field": "",
+                                    "value": "",
+                                    "operator": ""
+                                }
+                            ]
+                        }
+                    },
+                    "editor_options": {
+                        "title": "Text Area",
+                        "icon_class": "ff-edit-textarea",
+                        "template": "inputTextarea"
+                    },
+                    "uniqElKey": "ctp_message_3e66c473"
+                }
+            ],
+            "submitButton": {
+                "uniqElKey": "el_1524065200616",
+                "element": "button",
+                "attributes": {
+                    "type": "submit",
+                    "class": ""
+                },
+                "settings": {
+                    "align": "left",
+                    "button_style": "default",
+                    "container_class": "",
+                    "help_message": "",
+                    "background_color": "#9e3a20",
+                    "button_size": "md",
+                    "color": "#ffffff",
+                    "button_ui": {
+                        "type": "default",
+                        "text": "Send my request",
+                        "img_url": ""
+                    }
+                },
+                "editor_options": {
+                    "title": "Submit Button"
+                }
+            }
+        },
+        "has_payment": "0",
+        "type": "form",
+        "conditions": null,
+        "created_by": null,
+        "created_at": "2026-09-20 14:55:41",
+        "updated_at": "2026-09-20 15:05:34",
+        "form_meta": [
+            {
+                "id": 10,
+                "form_id": "3",
+                "meta_key": "formSettings",
+                "value": "{\"confirmation\":{\"redirectTo\":\"customPage\",\"messageToShow\":\"Thank you for your message. We will get in touch with you shortly\",\"customPage\":\"47\",\"samePageFormBehavior\":\"hide_form\",\"customUrl\":null},\"restrictions\":{\"limitNumberOfEntries\":{\"enabled\":false,\"numberOfEntries\":null,\"period\":\"total\",\"limitReachedMsg\":\"Maximum number of entries exceeded.\"},\"scheduleForm\":{\"enabled\":false,\"start\":null,\"end\":null,\"selectedDays\":null,\"pendingMsg\":\"Form submission is not started yet.\",\"expiredMsg\":\"Form submission is now closed.\"},\"requireLogin\":{\"enabled\":false,\"requireLoginMsg\":\"You must be logged in to submit the form.\"},\"denyEmptySubmission\":{\"enabled\":true,\"message\":\"Sorry, you cannot submit an empty form. Let's hear what you wanna say.\"},\"restrictForm\":{\"enabled\":false,\"fields\":{\"ip\":{\"status\":false,\"values\":\"\",\"message\":\"Sorry! You can't submit a form from your IP address.\",\"validation_type\":\"fail_on_condition_met\"},\"country\":{\"status\":false,\"values\":[],\"message\":\"Sorry! You can't submit a form the country you are residing.\",\"validation_type\":\"fail_on_condition_met\"},\"keywords\":{\"status\":false,\"values\":\"\",\"message\":\"Sorry! Your submission contains some restricted keywords.\"}}}},\"layout\":{\"labelPlacement\":\"top\",\"asteriskPlacement\":\"asterisk-right\",\"helpMessagePlacement\":\"with_label\",\"errorMessagePlacement\":\"inline\",\"cssClassName\":\"\"},\"delete_entry_on_submission\":\"no\",\"conv_form_per_step_save\":false,\"conv_form_resume_from_last_step\":false}"
+            },
+            {
+                "id": 12,
+                "form_id": "3",
+                "meta_key": "notifications",
+                "value": "{\"name\":\"New estimate request\",\"sendTo\":{\"type\":\"email\",\"email\":\"info@chicagolandtuckpointing.com\",\"field\":\"email\",\"routing\":[{\"email\":null,\"field\":null,\"operator\":\"=\",\"value\":null}]},\"fromName\":\"Chicagoland Tuckpointing\",\"fromEmail\":\"\",\"replyTo\":\"{inputs.email}\",\"bcc\":\"\",\"subject\":\"Estimate request: {inputs.service} in {inputs.town}\",\"message\":\"<p><strong>New estimate request from the website.<\\/strong><\\/p>\\n<p><strong>Name:<\\/strong> {inputs.names}<br \\/>\\n<strong>Phone:<\\/strong> {inputs.phone}<br \\/>\\n<strong>Email:<\\/strong> {inputs.email}<br \\/>\\n<strong>Town:<\\/strong> {inputs.town}<br \\/>\\n<strong>Service:<\\/strong> {inputs.service}<\\/p>\\n<p><strong>What they said:<\\/strong><br \\/>{inputs.message}<\\/p>\\n<hr \\/>\\n<p>Submitted from {embed_post.permalink}<\\/p>\",\"conditionals\":{\"status\":false,\"type\":\"all\",\"conditions\":[{\"field\":null,\"operator\":\"=\",\"value\":null}]},\"enabled\":true,\"email_template\":\"\"}"
+            },
+            {
+                "id": 11,
+                "form_id": "3",
+                "meta_key": "template_name",
+                "value": "basic_contact_form"
+            }
+        ],
+        "metas": [
+            {
+                "id": 10,
+                "form_id": "3",
+                "meta_key": "formSettings",
+                "value": "{\"confirmation\":{\"redirectTo\":\"customPage\",\"messageToShow\":\"Thank you for your message. We will get in touch with you shortly\",\"customPage\":\"47\",\"samePageFormBehavior\":\"hide_form\",\"customUrl\":null},\"restrictions\":{\"limitNumberOfEntries\":{\"enabled\":false,\"numberOfEntries\":null,\"period\":\"total\",\"limitReachedMsg\":\"Maximum number of entries exceeded.\"},\"scheduleForm\":{\"enabled\":false,\"start\":null,\"end\":null,\"selectedDays\":null,\"pendingMsg\":\"Form submission is not started yet.\",\"expiredMsg\":\"Form submission is now closed.\"},\"requireLogin\":{\"enabled\":false,\"requireLoginMsg\":\"You must be logged in to submit the form.\"},\"denyEmptySubmission\":{\"enabled\":true,\"message\":\"Sorry, you cannot submit an empty form. Let's hear what you wanna say.\"},\"restrictForm\":{\"enabled\":false,\"fields\":{\"ip\":{\"status\":false,\"values\":\"\",\"message\":\"Sorry! You can't submit a form from your IP address.\",\"validation_type\":\"fail_on_condition_met\"},\"country\":{\"status\":false,\"values\":[],\"message\":\"Sorry! You can't submit a form the country you are residing.\",\"validation_type\":\"fail_on_condition_met\"},\"keywords\":{\"status\":false,\"values\":\"\",\"message\":\"Sorry! Your submission contains some restricted keywords.\"}}}},\"layout\":{\"labelPlacement\":\"top\",\"asteriskPlacement\":\"asterisk-right\",\"helpMessagePlacement\":\"with_label\",\"errorMessagePlacement\":\"inline\",\"cssClassName\":\"\"},\"delete_entry_on_submission\":\"no\",\"conv_form_per_step_save\":false,\"conv_form_resume_from_last_step\":false}"
+            },
+            {
+                "id": 12,
+                "form_id": "3",
+                "meta_key": "notifications",
+                "value": "{\"name\":\"New estimate request\",\"sendTo\":{\"type\":\"email\",\"email\":\"info@chicagolandtuckpointing.com\",\"field\":\"email\",\"routing\":[{\"email\":null,\"field\":null,\"operator\":\"=\",\"value\":null}]},\"fromName\":\"Chicagoland Tuckpointing\",\"fromEmail\":\"\",\"replyTo\":\"{inputs.email}\",\"bcc\":\"\",\"subject\":\"Estimate request: {inputs.service} in {inputs.town}\",\"message\":\"<p><strong>New estimate request from the website.<\\/strong><\\/p>\\n<p><strong>Name:<\\/strong> {inputs.names}<br \\/>\\n<strong>Phone:<\\/strong> {inputs.phone}<br \\/>\\n<strong>Email:<\\/strong> {inputs.email}<br \\/>\\n<strong>Town:<\\/strong> {inputs.town}<br \\/>\\n<strong>Service:<\\/strong> {inputs.service}<\\/p>\\n<p><strong>What they said:<\\/strong><br \\/>{inputs.message}<\\/p>\\n<hr \\/>\\n<p>Submitted from {embed_post.permalink}<\\/p>\",\"conditionals\":{\"status\":false,\"type\":\"all\",\"conditions\":[{\"field\":null,\"operator\":\"=\",\"value\":null}]},\"enabled\":true,\"email_template\":\"\"}"
+            },
+            {
+                "id": 11,
+                "form_id": "3",
+                "meta_key": "template_name",
+                "value": "basic_contact_form"
+            }
+        ]
+    }
+]
