@@ -37,7 +37,7 @@ while ( have_posts() ) :
 						<h2 class="panel__title"><?php esc_html_e( 'Call us', 'ctp' ); ?></h2>
 						<?php if ( $ctp_phone ) : ?>
 							<p>
-								<a class="footer__phone" style="color:var(--ink);font-size:1.5rem" href="tel:<?php echo esc_attr( ctp_tel( $ctp_phone ) ); ?>">
+								<a class="phone-display" href="tel:<?php echo esc_attr( ctp_tel( $ctp_phone ) ); ?>">
 									<?php echo esc_html( $ctp_phone ); ?>
 								</a>
 							</p>

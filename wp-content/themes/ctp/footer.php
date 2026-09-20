@@ -103,7 +103,7 @@ $ctp_socials  = array_filter(
 				</ul>
 
 				<?php if ( ctp_hours_lines() ) : ?>
-					<h2 class="footer__heading" style="margin-top:1.5rem"><?php esc_html_e( 'Hours', 'ctp' ); ?></h2>
+					<h2 class="footer__heading footer__heading--gap"><?php esc_html_e( 'Hours', 'ctp' ); ?></h2>
 					<ul class="ctp-hours">
 						<?php foreach ( ctp_hours_lines() as $ctp_line ) : ?>
 							<?php $ctp_parts = array_map( 'trim', explode( ':', $ctp_line, 2 ) ); ?>
@@ -141,7 +141,7 @@ $ctp_socials  = array_filter(
 								'theme_location' => 'footer',
 								'container'      => false,
 								'depth'          => 1,
-								'items_wrap'     => '<ul style="display:flex;gap:1rem;flex-wrap:wrap">%3$s</ul>',
+								'items_wrap'     => '<ul class="footer__menu">%3$s</ul>',
 								'fallback_cb'    => false,
 							)
 						);

@@ -504,6 +504,47 @@ code, pre {
 	list-style: none;
 }
 
+/* --- Mega panels --------------------------------------------------------- */
+
+.mega__grid,
+.mega__list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.mega__grid li,
+.mega__list li { margin: 0; }
+
+.mega__aside-title {
+	margin-bottom: 0.4rem;
+	color: var(--ink);
+	font-size: var(--fs-sm);
+	font-weight: 700;
+	letter-spacing: -0.012em;
+}
+
+.mega__aside-text {
+	margin-bottom: var(--sp-4);
+	color: var(--muted);
+	font-size: var(--fs-xs);
+	line-height: 1.6;
+}
+
+.mega__aside-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	color: var(--brand-600);
+	font-size: var(--fs-xs);
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.mega__aside-link:hover { color: var(--brand-700); }
+
 /* --- Desktop navigation -------------------------------------------------- */
 
 @media (min-width: 961px) {
@@ -546,6 +587,115 @@ code, pre {
 		border-left-color: var(--brand);
 		color: var(--ink);
 		font-weight: 600;
+	}
+
+	/* A mega item drops out of the positioning context so its panel can span
+	   the full header width rather than the width of one list item. */
+	.nav > ul > li.menu-item--mega { position: static; }
+
+	.mega {
+		display: none;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100%;
+		z-index: 60;
+		/* Never let a panel run past the fold; scroll it instead. */
+		max-height: calc(100vh - var(--header-h));
+		overflow-y: auto;
+		background: var(--bg);
+		border-top: 2px solid var(--brand);
+		border-bottom: 1px solid var(--line);
+		box-shadow: var(--sh-2);
+	}
+
+	.nav > ul > li:hover > .mega,
+	.nav .nav__toggle[aria-expanded="true"] + .mega { display: block; }
+
+	.mega__inner {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 16rem;
+		gap: var(--sp-6);
+		padding-block: var(--sp-5);
+	}
+
+	/* Services: two columns of icon rows. */
+	.mega__grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0 var(--sp-5);
+	}
+
+	.mega__grid a {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.7rem;
+		padding: 0.5rem 0.65rem;
+		border: 0;
+		border-radius: var(--r-sm);
+		text-decoration: none;
+	}
+
+	.mega__grid a:hover { background: var(--bg-2); }
+
+	.mega__icon {
+		display: grid;
+		place-items: center;
+		flex: none;
+		width: 30px;
+		height: 30px;
+		border-radius: var(--r-sm);
+		background: var(--brand-tint);
+		border: 1px solid var(--brand-line);
+		color: var(--brand);
+	}
+
+	.mega__body { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+
+	.mega__title {
+		color: var(--ink);
+		font-size: var(--fs-sm);
+		font-weight: 650;
+		letter-spacing: -0.01em;
+	}
+
+	/* Clamped to two lines. Taglines are author-written and vary in length;
+	   without this, one long one sets the row height for the whole grid and
+	   the panel grows past the fold. */
+	.mega__desc {
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		color: var(--muted);
+		font-size: var(--fs-xs);
+		line-height: 1.45;
+	}
+
+	/* Areas: a plain multi-column list. Column flow keeps alphabetical order
+	   reading down each column, and matches the DOM order for keyboard use. */
+	.mega__list {
+		columns: 4;
+		column-gap: var(--sp-6);
+	}
+
+	.mega__list li { break-inside: avoid; }
+
+	.mega__list a {
+		display: block;
+		padding: 0.42rem 0;
+		border: 0;
+		color: var(--ink-2);
+		font-size: var(--fs-sm);
+		text-decoration: none;
+	}
+
+	.mega__list a:hover { color: var(--brand-600); }
+
+	.mega__aside {
+		padding-left: var(--sp-6);
+		border-left: 1px solid var(--line);
 	}
 }
 
@@ -646,6 +796,57 @@ code, pre {
 	}
 
 	.nav .sub-menu a:hover { color: var(--brand-600); }
+
+	/* Mega panels collapse to the same inline accordion as a plain submenu.
+	   No floating panel, no columns, and the aside is dropped — on a phone it
+	   is a second CTA competing with the sticky call bar. */
+	.mega {
+		display: none;
+		flex-basis: 100%;
+		width: 100%;
+		margin-bottom: 0.6rem;
+		padding: 0 0 0.6rem 0.9rem;
+		border-left: 2px solid var(--brand-line);
+	}
+
+	.nav .nav__toggle[aria-expanded="true"] + .mega { display: block; }
+
+	.mega .container { padding-inline: 0; max-width: none; }
+	.mega__inner { display: block; }
+	.mega__aside { display: none; }
+	.mega__grid, .mega__list { display: block; columns: auto; }
+
+	.mega__grid a,
+	.mega__list a {
+		display: flex;
+		align-items: center;
+		gap: 0.7rem;
+		padding: 0.55rem 0;
+		min-height: 44px;
+		color: var(--muted);
+		font-size: var(--fs-sm);
+		text-decoration: none;
+	}
+
+	.mega__grid a:hover,
+	.mega__list a:hover { color: var(--brand-600); }
+
+	.mega__icon {
+		display: grid;
+		place-items: center;
+		flex: none;
+		width: 28px;
+		height: 28px;
+		border-radius: var(--r-sm);
+		background: var(--brand-tint);
+		border: 1px solid var(--brand-line);
+		color: var(--brand);
+	}
+
+	.mega__title { color: var(--ink-2); font-weight: 550; }
+
+	/* The one-line tagline is useful on a wide panel, noise in a phone list. */
+	.mega__desc { display: none; }
 }
 
 @media (max-width: 520px) {
@@ -1319,6 +1520,7 @@ a.pill:hover { border-color: var(--brand); color: var(--brand-600); }
 
 .ba {
 	position: relative;
+	margin: 0;
 	border-radius: var(--r);
 	overflow: hidden;
 	background: var(--bg-3);
@@ -1542,6 +1744,18 @@ label {
 
 .form-fallback__title { color: var(--ink); font-weight: 650; }
 
+/* The contact page's headline phone number. */
+.phone-display {
+	display: inline-block;
+	color: var(--ink);
+	font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.625rem);
+	font-weight: 700;
+	letter-spacing: -0.028em;
+	text-decoration: none;
+}
+
+.phone-display:hover { color: var(--brand-600); }
+
 .search-form { display: flex; gap: 0.5rem; }
 .search-form label { flex: 1; margin: 0; }
 
@@ -1606,10 +1820,13 @@ label {
 
 .footer__contact .icon { margin-top: 0.15rem; color: var(--brand-light); flex: none; }
 
+/* Sized to sit in the footer list, not to shout over it — the weight and the
+   white already carry the emphasis. The big treatment belongs on the contact
+   page, where the number is the point of the page; see .phone-display. */
 .footer__phone {
-	font-size: 1.3125rem;
+	font-size: var(--fs-lg);
 	font-weight: 700;
-	letter-spacing: -0.02em;
+	letter-spacing: -0.015em;
 	color: #fff !important;
 }
 
@@ -1625,6 +1842,19 @@ label {
 }
 
 .footer__social { display: flex; flex-wrap: wrap; gap: var(--sp-4); }
+
+.footer__heading--gap { margin-top: var(--sp-5); }
+
+.footer__menu {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-4);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.footer__menu li { margin: 0; }
 
 .ctp-hours { margin: 0; padding: 0; list-style: none; }
 
@@ -1688,6 +1918,7 @@ label {
 .u-mt-5 { margin-top: var(--sp-5); }
 .u-mt-6 { margin-top: var(--sp-6); }
 .u-mt-7 { margin-top: var(--sp-7); }
+.u-measure { max-width: 32rem; }
 
 .alignwide { max-width: min(100%, 68rem); margin-inline: auto; }
 .alignfull { max-width: none; }

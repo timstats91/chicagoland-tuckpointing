@@ -68,7 +68,7 @@ get_header();
 					</div>
 				<?php endif; ?>
 
-				<div class="u-mt-7" style="max-width:32rem">
+				<div class="u-mt-7 u-measure">
 					<?php get_search_form(); ?>
 				</div>
 			</div>

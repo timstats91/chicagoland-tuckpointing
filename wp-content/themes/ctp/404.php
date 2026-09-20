@@ -35,7 +35,7 @@ get_header();
 			</div>
 		<?php endif; ?>
 
-		<div class="u-mt-7" style="max-width:32rem">
+		<div class="u-mt-7 u-measure">
 			<h2 class="section__title"><?php esc_html_e( 'Or search the site', 'ctp' ); ?></h2>
 			<?php get_search_form(); ?>
 		</div>

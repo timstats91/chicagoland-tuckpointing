@@ -59,7 +59,7 @@ while ( have_posts() ) :
 				<article <?php post_class( 'u-flow' ); ?>>
 
 					<?php if ( $ctp_before && $ctp_after ) : ?>
-						<figure class="ba" style="margin:0">
+						<figure class="ba">
 							<div class="ba__pane">
 								<?php echo wp_get_attachment_image( $ctp_before, 'ctp-wide', false, array( 'alt' => esc_attr__( 'Before', 'ctp' ) ) ); ?>
 							</div>
