@@ -309,8 +309,19 @@ function ctp_run_seed() {
 		update_option( 'page_for_posts', $page_ids['knowledge-hub'] );
 	}
 
-	// Pretty permalinks; tuckpointing-in-elmhurst beats ?p=417.
-	if ( ! get_option( 'permalink_structure' ) ) {
+	/*
+	 * Pretty permalinks; /tuckpointing-cost-chicago-suburbs/ beats
+	 * /2026/09/20/tuckpointing-cost-chicago-suburbs/ for a knowledge hub.
+	 *
+	 * The obvious guard — "only set it if the option is empty" — does not hold
+	 * in practice. Softaculous and several one-click installers pre-set a
+	 * date-based structure, so an emptiness check silently leaves every article
+	 * buried under a date. Replace anything that has no %postname% in it, and
+	 * leave anything that does, so a deliberate /blog/%postname%/ survives.
+	 */
+	$permalinks = (string) get_option( 'permalink_structure' );
+
+	if ( false === strpos( $permalinks, '%postname%' ) ) {
 		update_option( 'permalink_structure', '/%postname%/' );
 	}
 
