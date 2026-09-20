@@ -1,14 +1,98 @@
 /**
  * Chicagoland Tuckpointing — front-end behaviour.
  *
- * Two things only: the mobile menu and the before/after slider. Everything
- * else (FAQ accordions, lazy images, smooth scrolling) is handled natively by
- * the browser, which is faster and works when this file fails to load.
+ * Three things: the mobile menu, the nav dropdowns, and the before/after
+ * slider. FAQ accordions, lazy images and smooth scrolling are all native, so
+ * they keep working if this file never loads.
  */
 ( function () {
 	'use strict';
 
-	/* --- Mobile navigation ---------------------------------------------- */
+	var DESKTOP = '(min-width: 961px)';
+
+	/* --- Nav dropdowns ---------------------------------------------------- */
+
+	function initDropdowns() {
+		var toggles = document.querySelectorAll( '.nav__toggle' );
+
+		if ( ! toggles.length ) {
+			return;
+		}
+
+		function close( toggle ) {
+			toggle.setAttribute( 'aria-expanded', 'false' );
+		}
+
+		function closeAll( except ) {
+			Array.prototype.forEach.call( toggles, function ( toggle ) {
+				if ( toggle !== except ) {
+					close( toggle );
+				}
+			} );
+		}
+
+		Array.prototype.forEach.call( toggles, function ( toggle ) {
+			var item = toggle.closest( 'li' );
+
+			toggle.addEventListener( 'click', function () {
+				var open = 'true' === toggle.getAttribute( 'aria-expanded' );
+				closeAll( toggle );
+				toggle.setAttribute( 'aria-expanded', open ? 'false' : 'true' );
+			} );
+
+			if ( ! item ) {
+				return;
+			}
+
+			// Keep aria-expanded truthful while tabbing through the submenu,
+			// rather than letting CSS :focus-within open a menu the button
+			// still claims is closed.
+			item.addEventListener( 'focusin', function () {
+				if ( window.matchMedia( DESKTOP ).matches ) {
+					closeAll( toggle );
+					toggle.setAttribute( 'aria-expanded', 'true' );
+				}
+			} );
+
+			item.addEventListener( 'focusout', function ( event ) {
+				if ( ! window.matchMedia( DESKTOP ).matches ) {
+					return;
+				}
+
+				if ( ! item.contains( event.relatedTarget ) ) {
+					close( toggle );
+				}
+			} );
+		} );
+
+		// Escape closes the open menu and puts focus back on its button.
+		document.addEventListener( 'keydown', function ( event ) {
+			if ( 'Escape' !== event.key ) {
+				return;
+			}
+
+			Array.prototype.forEach.call( toggles, function ( toggle ) {
+				if ( 'true' !== toggle.getAttribute( 'aria-expanded' ) ) {
+					return;
+				}
+
+				var item = toggle.closest( 'li' );
+				close( toggle );
+
+				if ( item && item.contains( document.activeElement ) ) {
+					toggle.focus();
+				}
+			} );
+		} );
+
+		document.addEventListener( 'click', function ( event ) {
+			if ( ! event.target.closest( '.nav' ) ) {
+				closeAll( null );
+			}
+		} );
+	}
+
+	/* --- Mobile navigation ------------------------------------------------ */
 
 	function initNav() {
 		var toggle = document.querySelector( '.nav-toggle' );
@@ -28,10 +112,10 @@
 			toggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
 		} );
 
-		// Close on escape, on outside click, and when a link is followed.
 		document.addEventListener( 'keydown', function ( event ) {
-			if ( 'Escape' === event.key ) {
+			if ( 'Escape' === event.key && nav.classList.contains( 'is-open' ) ) {
 				close();
+				toggle.focus();
 			}
 		} );
 
@@ -41,14 +125,16 @@
 			}
 		} );
 
+		// Following a link closes the panel — but tapping a submenu disclosure
+		// inside it must not.
 		nav.addEventListener( 'click', function ( event ) {
-			if ( 'A' === event.target.tagName ) {
+			if ( event.target.closest( 'a' ) ) {
 				close();
 			}
 		} );
 
-		// Reset state if the viewport grows past the mobile breakpoint.
-		var wide = window.matchMedia( '(min-width: 961px)' );
+		var wide = window.matchMedia( DESKTOP );
+
 		var onChange = function ( event ) {
 			if ( event.matches ) {
 				close();
@@ -62,7 +148,7 @@
 		}
 	}
 
-	/* --- Before / after slider ------------------------------------------- */
+	/* --- Before / after slider -------------------------------------------- */
 
 	function initBeforeAfter( root ) {
 		var after = root.querySelector( '.ba__after' );
@@ -122,7 +208,6 @@
 		window.addEventListener( 'mouseup', end );
 		window.addEventListener( 'touchend', end );
 
-		// Keyboard support: the handle is a real focusable slider.
 		handle.addEventListener( 'keydown', function ( event ) {
 			var current = parseFloat( handle.getAttribute( 'aria-valuenow' ) || '50' );
 			var step = event.shiftKey ? 10 : 2;
@@ -149,6 +234,7 @@
 
 	function init() {
 		initNav();
+		initDropdowns();
 		Array.prototype.forEach.call( document.querySelectorAll( '.ba' ), initBeforeAfter );
 	}
 

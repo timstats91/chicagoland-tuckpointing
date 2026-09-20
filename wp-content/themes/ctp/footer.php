@@ -28,8 +28,8 @@ $ctp_socials  = array_filter(
 		<div class="footer__top">
 
 			<div class="footer__brand">
-				<h2 class="footer__heading"><?php echo esc_html( ctp_business( 'name', get_bloginfo( 'name' ) ) ); ?></h2>
-				<p><?php echo esc_html( ctp_business( 'tagline' ) ); ?></p>
+				<?php ctp_logo( 'logo--footer' ); ?>
+				<p class="u-mt-4"><?php echo esc_html( ctp_business( 'tagline' ) ); ?></p>
 				<?php if ( ctp_business( 'insured' ) ) : ?>
 					<p class="u-small"><?php esc_html_e( 'Licensed and fully insured. Certificate available on request.', 'ctp' ); ?></p>
 				<?php endif; ?>
@@ -117,10 +117,6 @@ $ctp_socials  = array_filter(
 					</ul>
 				<?php endif; ?>
 			</div>
-
-			<?php if ( is_active_sidebar( 'footer-extra' ) ) : ?>
-				<div><?php dynamic_sidebar( 'footer-extra' ); ?></div>
-			<?php endif; ?>
 
 		</div>
 

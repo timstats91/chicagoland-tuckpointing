@@ -5,7 +5,7 @@
 		"appearanceTools": false,
 		"useRootPaddingAwareAlignments": false,
 		"layout": {
-			"contentSize": "44rem",
+			"contentSize": "42rem",
 			"wideSize": "68rem"
 		},
 		"color": {
@@ -15,15 +15,16 @@
 			"custom": true,
 			"customGradient": false,
 			"palette": [
-				{ "slug": "ink", "color": "#131a21", "name": "Ink" },
-				{ "slug": "body", "color": "#33414f", "name": "Body text" },
-				{ "slug": "muted", "color": "#63717f", "name": "Muted" },
-				{ "slug": "brand", "color": "#b4472b", "name": "Brick red" },
-				{ "slug": "brand-tint", "color": "#fdf3ef", "name": "Brick tint" },
-				{ "slug": "navy", "color": "#16242f", "name": "Slate" },
+				{ "slug": "ink", "color": "#14181a", "name": "Ink" },
+				{ "slug": "body", "color": "#2f3539", "name": "Body text" },
+				{ "slug": "muted", "color": "#575f65", "name": "Muted" },
+				{ "slug": "brand", "color": "#9e3a20", "name": "Oxide" },
+				{ "slug": "brand-deep", "color": "#86301a", "name": "Oxide deep" },
+				{ "slug": "brand-tint", "color": "#faf0ec", "name": "Oxide tint" },
+				{ "slug": "graphite", "color": "#16191b", "name": "Graphite" },
 				{ "slug": "surface", "color": "#ffffff", "name": "White" },
-				{ "slug": "surface-alt", "color": "#f6f8f9", "name": "Off white" },
-				{ "slug": "line", "color": "#e3e8ec", "name": "Hairline" }
+				{ "slug": "surface-alt", "color": "#f4f4f2", "name": "Stone" },
+				{ "slug": "line", "color": "#e2e2de", "name": "Hairline" }
 			]
 		},
 		"typography": {
@@ -31,10 +32,10 @@
 			"lineHeight": true,
 			"dropCap": false,
 			"fontSizes": [
-				{ "slug": "small", "size": "0.9063rem", "name": "Small" },
-				{ "slug": "medium", "size": "1.0938rem", "name": "Normal" },
-				{ "slug": "large", "size": "1.25rem", "name": "Large" },
-				{ "slug": "x-large", "size": "1.6rem", "name": "Extra large" }
+				{ "slug": "small", "size": "0.875rem", "name": "Small" },
+				{ "slug": "medium", "size": "1.0625rem", "name": "Normal" },
+				{ "slug": "large", "size": "1.1875rem", "name": "Large" },
+				{ "slug": "x-large", "size": "1.5rem", "name": "Extra large" }
 			]
 		},
 		"spacing": {
@@ -55,20 +56,20 @@
 			"text": "var(--wp--preset--color--body)"
 		},
 		"typography": {
-			"fontFamily": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
-			"fontSize": "1.0938rem",
-			"lineHeight": "1.72"
+			"fontFamily": "'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+			"fontSize": "1.0625rem",
+			"lineHeight": "1.7"
 		},
 		"elements": {
 			"link": {
-				"color": { "text": "#9c3b22" }
+				"color": { "text": "#86301a" }
 			},
 			"heading": {
 				"color": { "text": "var(--wp--preset--color--ink)" },
 				"typography": {
 					"fontWeight": "700",
-					"lineHeight": "1.18",
-					"letterSpacing": "-0.022em"
+					"lineHeight": "1.14",
+					"letterSpacing": "-0.024em"
 				}
 			}
 		}

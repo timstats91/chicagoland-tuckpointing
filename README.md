@@ -103,6 +103,40 @@ Step 6 builds all 42 pages, sets the front page, the permalink structure and the
 
 ---
 
+## Design system
+
+**Direction: refined industrial.** Square geometry (2–4px radii, never a pill), hairline rules carrying the structure instead of boxes and drop shadows, and a single restrained oxide accent taken from weathered common brick. Section labels are tracked uppercase preceded by a short clay rule — that rule is the motif that ties the sections together.
+
+**Typeface: Archivo**, self-hosted from `assets/fonts/`. One variable file covers weights 400–700, so using it for body text as well as headings costs nothing extra. SIL Open Font License, included as `OFL.txt`.
+
+There is no third-party font request — nothing is fetched from Google at runtime. The latin subset is preloaded; the latin-ext subset sits behind a `unicode-range` so it only downloads on pages that actually contain those characters.
+
+To drop back to the system stack entirely, one line in a child theme or `functions.php`:
+
+```php
+add_filter( 'ctp_use_webfont', '__return_false' );
+```
+
+**Payload:** 9.0 KB CSS + 1.8 KB JS gzipped, plus a 34 KB font — about **45 KB on first load**, cached from then on.
+
+### Accessibility
+
+Every text and UI colour pair in the theme is listed in `tools/contrast-check.php` with the WCAG level it has to clear. Run it after any palette change:
+
+```bash
+php tools/contrast-check.php
+```
+
+It exits non-zero on a failure, so it works as a pre-commit check. All 28 pairs currently pass WCAG 2.1 AA — body text at 4.5:1 and UI boundaries, focus rings and meaningful icons at 3:1.
+
+Also built in: a single visible focus treatment that is never removed (and switches to a lighter clay on dark sections so it keeps its contrast), 44px minimum touch targets, keyboard-operable dropdowns following the ARIA disclosure pattern, and `prefers-reduced-motion` plus `prefers-contrast` support.
+
+### No widget areas — on purpose
+
+The footer is composed from your services, service areas and business details, so there is nothing for a widget area to add. It also sidesteps a WordPress behaviour that catches every theme with exactly one sidebar: on a fresh install, core drops its default widgets (Archives, Categories, Meta) into the first registered sidebar it finds. If you ever add one back, set a matching default in `after_switch_theme` so core does not choose for you.
+
+---
+
 ## Where to change things
 
 | What | Where |

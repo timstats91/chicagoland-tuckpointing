@@ -1,30 +1,53 @@
 /*
  * Block editor styles.
  *
- * Keeps the editing experience close to the published page so nobody has to
+ * Loads the same typeface and palette as the front end so nobody has to
  * preview to see what they are writing.
  */
 
+@font-face {
+	font-family: 'Archivo';
+	font-style: normal;
+	font-weight: 400 700;
+	font-stretch: 100%;
+	font-display: swap;
+	src: url('../fonts/archivo-latin.woff2') format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+		U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+		U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+	font-family: 'Archivo';
+	font-style: normal;
+	font-weight: 400 700;
+	font-stretch: 100%;
+	font-display: swap;
+	src: url('../fonts/archivo-latin-ext.woff2') format('woff2');
+	unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+		U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+		U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+		U+A720-A7FF;
+}
+
 .editor-styles-wrapper {
-	--ink: #131a21;
-	--ink-2: #33414f;
-	--muted: #63717f;
-	--line: #e3e8ec;
-	--bg-2: #f6f8f9;
-	--brand: #b4472b;
-	--brand-600: #9c3b22;
+	--ink: #14181a;
+	--ink-2: #2f3539;
+	--muted: #575f65;
+	--line: #e2e2de;
+	--bg-2: #f4f4f2;
+	--brand: #9e3a20;
+	--brand-600: #86301a;
 
 	background: #fff;
 	color: var(--ink-2);
-	font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	font-size: 1.0938rem;
-	line-height: 1.72;
+	font-family: 'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+		Roboto, 'Helvetica Neue', Arial, sans-serif;
+	font-size: 1.0625rem;
+	line-height: 1.7;
 }
 
-.editor-styles-wrapper .wp-block {
-	max-width: 44rem;
-}
-
+.editor-styles-wrapper .wp-block { max-width: 42rem; }
 .editor-styles-wrapper .wp-block[data-align="wide"] { max-width: 68rem; }
 .editor-styles-wrapper .wp-block[data-align="full"] { max-width: none; }
 
@@ -34,13 +57,13 @@
 .editor-styles-wrapper h4 {
 	color: var(--ink);
 	font-weight: 700;
-	line-height: 1.18;
-	letter-spacing: -0.022em;
+	line-height: 1.14;
+	letter-spacing: -0.024em;
 }
 
-.editor-styles-wrapper h1 { font-size: 2.6rem; letter-spacing: -0.03em; }
-.editor-styles-wrapper h2 { font-size: 1.9rem; margin-top: 2.5rem; }
-.editor-styles-wrapper h3 { font-size: 1.35rem; margin-top: 2rem; }
+.editor-styles-wrapper h1 { font-size: 2.75rem; letter-spacing: -0.034em; }
+.editor-styles-wrapper h2 { font-size: 2rem; margin-top: 2.75rem; letter-spacing: -0.028em; }
+.editor-styles-wrapper h3 { font-size: 1.3rem; margin-top: 2.25rem; }
 
 .editor-styles-wrapper strong { color: var(--ink); font-weight: 650; }
 .editor-styles-wrapper a { color: var(--brand-600); }
@@ -49,9 +72,8 @@
 .editor-styles-wrapper blockquote {
 	padding: 1.25rem 1.75rem;
 	background: var(--bg-2);
-	border-left: 3px solid var(--brand);
-	border-radius: 0 10px 10px 0;
-	font-size: 1.0938rem;
+	border-left: 2px solid var(--brand);
+	font-size: 1.0625rem;
 	color: var(--ink);
 }
 

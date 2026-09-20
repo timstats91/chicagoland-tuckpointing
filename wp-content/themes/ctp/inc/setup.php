@@ -51,22 +51,19 @@ function ctp_content_width() {
 add_action( 'after_setup_theme', 'ctp_content_width', 0 );
 
 /**
- * Footer widget area, optional.
+ * This theme registers no widget areas, on purpose.
+ *
+ * The footer is composed from the services, service areas and business details
+ * rather than assembled from widgets, so there is nothing for a widget area to
+ * add. It also avoids a WordPress behaviour that bites every theme with exactly
+ * one sidebar: on a fresh install, core drops its default widget set (Archives,
+ * Categories, Meta, Recent Posts) into the first registered sidebar it finds.
+ * That is where the stray "Archives" list in the footer came from.
+ *
+ * If you ever do want a widget area here, register it AND set a matching
+ * default in the theme's `after_switch_theme` hook so core does not pick for
+ * you. See https://developer.wordpress.org/reference/functions/retrieve_widgets/
  */
-function ctp_widgets_init() {
-	register_sidebar(
-		array(
-			'name'          => __( 'Footer Extra', 'ctp' ),
-			'id'            => 'footer-extra',
-			'description'   => __( 'Optional. Appears in the footer next to the contact details.', 'ctp' ),
-			'before_widget' => '<div id="%1$s" class="footer__widget %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h3 class="footer__heading">',
-			'after_title'   => '</h3>',
-		)
-	);
-}
-add_action( 'widgets_init', 'ctp_widgets_init' );
 
 /**
  * Give the body a hook for per-template styling.

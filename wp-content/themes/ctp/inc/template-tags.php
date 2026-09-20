@@ -8,6 +8,71 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * The logo mark: three courses of running-bond brick with one header course
+ * picked out in clay.
+ *
+ * Drawn as bricks rather than as a filled tile, so the "mortar" is whatever is
+ * behind it. That means one mark works on the white header and the dark footer
+ * with no second file and no inversion — the bricks take currentColor.
+ *
+ * @param int $size Pixel size.
+ * @return string
+ */
+function ctp_get_logo_mark( $size = 36 ) {
+	return sprintf(
+		'<svg class="logo__mark" width="%1$d" height="%1$d" viewBox="0 0 36 36" aria-hidden="true" focusable="false">'
+			. '<g fill="currentColor">'
+			. '<rect x="0" y="0" width="16.5" height="10" rx="1"/>'
+			. '<rect x="19.5" y="0" width="16.5" height="10" rx="1"/>'
+			. '<rect x="0" y="13" width="7.5" height="10" rx="1"/>'
+			. '<rect x="28.5" y="13" width="7.5" height="10" rx="1"/>'
+			. '<rect x="0" y="26" width="16.5" height="10" rx="1"/>'
+			. '<rect x="19.5" y="26" width="16.5" height="10" rx="1"/>'
+			. '</g>'
+			. '<rect x="10.5" y="13" width="15" height="10" rx="1" fill="var(--logo-accent)"/>'
+			. '</svg>',
+		(int) $size
+	);
+}
+
+/**
+ * The full lockup: mark plus stacked wordmark.
+ *
+ * Honours a custom logo when one is set in the Customizer, so uploading a real
+ * logo replaces this without touching a template.
+ *
+ * @param string $class Extra classes for the wrapper.
+ */
+function ctp_logo( $class = '' ) {
+	$classes = trim( 'logo ' . $class );
+
+	if ( has_custom_logo() ) {
+		printf( '<div class="%s logo--custom">', esc_attr( $classes ) );
+		the_custom_logo();
+		echo '</div>';
+		return;
+	}
+
+	$name  = (string) ctp_business( 'name', get_bloginfo( 'name' ) );
+	$parts = explode( ' ', $name, 2 );
+	$top   = $parts[0];
+	$main  = isset( $parts[1] ) ? $parts[1] : '';
+	?>
+	<a class="<?php echo esc_attr( $classes ); ?>" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+		<?php echo ctp_get_logo_mark( 36 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<span class="logo__word">
+			<?php if ( $main ) : ?>
+				<span class="logo__over"><?php echo esc_html( $top ); ?></span>
+				<span class="logo__main"><?php echo esc_html( $main ); ?></span>
+			<?php else : ?>
+				<span class="logo__main"><?php echo esc_html( $name ); ?></span>
+			<?php endif; ?>
+		</span>
+	</a>
+	<?php
+}
+
+/**
  * Build the breadcrumb trail. Also consumed by the schema output in the plugin,
  * so the visible breadcrumbs and the structured data can never disagree.
  *

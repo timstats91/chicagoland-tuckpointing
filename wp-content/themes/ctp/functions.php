@@ -16,6 +16,7 @@ require_once CTP_DIR . '/inc/enqueue.php';
 require_once CTP_DIR . '/inc/performance.php';
 require_once CTP_DIR . '/inc/icons.php';
 require_once CTP_DIR . '/inc/template-tags.php';
+require_once CTP_DIR . '/inc/nav.php';
 require_once CTP_DIR . '/inc/customizer.php';
 
 /**
