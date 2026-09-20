@@ -1,0 +1,73 @@
+# =============================================================================
+# This repository tracks only the code we wrote: the ctp theme, the ctp-core
+# plugin, and the docs. WordPress core, third-party plugins, uploads and
+# anything containing credentials stay out.
+#
+# A fresh clone is not a runnable site on its own — install WordPress, then
+# drop these two folders in. That is deliberate: core is WordPress's job to
+# update, and committing it means every WP release shows up as a 2,000 file
+# diff that buries the changes you actually made.
+# =============================================================================
+
+# --- Credentials and environment ---------------------------------------------
+# wp-config.php holds the database password and the auth salts. Never commit it.
+wp-config.php
+wp-config-local.php
+.env
+.env.*
+.htaccess
+.user.ini
+
+# --- WordPress core ----------------------------------------------------------
+/wp-admin/
+/wp-includes/
+/wp-*.php
+/index.php
+/license.txt
+/readme.html
+/xmlrpc.php
+
+# Local by Flywheel drops this in the webroot
+/local-xdebuginfo.php
+/local-phpinfo.php
+
+# --- wp-content: ignore everything, then re-include what is ours -------------
+/wp-content/index.php
+/wp-content/uploads/
+/wp-content/upgrade/
+/wp-content/upgrade-temp-backup/
+/wp-content/cache/
+/wp-content/languages/
+/wp-content/backup*/
+/wp-content/debug.log
+/wp-content/advanced-cache.php
+/wp-content/object-cache.php
+/wp-content/db.php
+/wp-content/mu-plugins/
+
+# Third-party plugins are reinstalled from wordpress.org, not versioned here
+/wp-content/plugins/*
+!/wp-content/plugins/ctp-core/
+
+# Bundled Twenty* themes likewise
+/wp-content/themes/*
+!/wp-content/themes/ctp/
+
+# --- Build output ------------------------------------------------------------
+# Regenerate with tools/build-zips.ps1 rather than committing stale archives.
+/dist/
+
+# --- OS and editor -----------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# --- Dependency directories (if ever added) ----------------------------------
+node_modules/
+vendor/

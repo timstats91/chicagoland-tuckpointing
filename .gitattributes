@@ -1,0 +1,35 @@
+# Normalize line endings so the same file does not show as changed just because
+# it was checked out on a different machine. Everything that ends up on the
+# Linux web server is stored and checked out as LF; PowerShell keeps CRLF.
+
+* text=auto eol=lf
+
+*.php   text eol=lf
+*.css   text eol=lf
+*.js    text eol=lf
+*.json  text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.svg   text eol=lf
+*.html  text eol=lf
+
+*.ps1   text eol=crlf
+*.bat   text eol=crlf
+
+# Binaries: never touch these.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.zip   binary
+*.pdf   binary
+
+# Keep repo-plumbing files out of GitHub's language statistics and
+# out of diffs where they add noise rather than information.
+docs/**    linguist-documentation
+*.md       linguist-documentation

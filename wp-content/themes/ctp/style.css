@@ -1,0 +1,20 @@
+/*
+Theme Name: Chicagoland Tuckpointing
+Theme URI: https://chicagolandtuckpointing.com
+Author: Chicagoland Tuckpointing
+Description: A fast, purpose-built theme for a masonry and tuckpointing contractor. No page builder, no jQuery, one small stylesheet. Pairs with the CTP Core plugin, which supplies services, service areas, projects and local SEO schema.
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 6.8
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: ctp
+Tags: business, custom-menu, featured-images, block-styles, wide-blocks, accessibility-ready
+*/
+
+/*
+ * Front-end styles live in assets/css/app.css, which is enqueued separately.
+ * This file exists for the theme header above and is not loaded on the front
+ * end, so adding rules here will have no effect.
+ */
