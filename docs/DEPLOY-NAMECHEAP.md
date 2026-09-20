@@ -186,7 +186,31 @@ Then send yourself a test submission and confirm it arrives in the inbox, not th
 - Uncheck **Organize my uploads into month- and year-based folders** if you would rather keep photo URLs tidy. Optional.
 
 **Appearance → Customize → Site Identity**
-- Upload a logo when you have one. Until then the theme shows a clean wordmark with a trowel icon.
+- **Site Icon:** upload `wp-content/themes/ctp/assets/img/site-icon-512.png`. That is the browser-tab and bookmark icon — two courses of running bond with one brick in clay, a simplified version of the header logo so it still reads at 16px.
+- **Logo:** upload one when you have it. Until then the theme shows the wordmark lockup with the brick mark, which is a finished look rather than a placeholder.
+
+---
+
+## Soft launch: live, but hidden from Google
+
+This is the right way to share the site with your dad before the content is finished.
+
+**Settings → Reading → tick "Discourage search engines from indexing this site".**
+
+This adds `noindex, nofollow` to every page. Anyone with the link can see the site; search engines are asked to stay away. Do this **immediately after installing**, before the site is reachable, so nothing gets indexed in a half-finished state.
+
+Two things worth understanding about it:
+
+- It is a request, not a wall. Google honours it; not every crawler does. It is the correct tool for "not ready yet", but it is not a password. If you need the site genuinely private, use a maintenance-mode plugin with a bypass link instead.
+- **Nothing will rank until you untick it.** This is the single most common way a new site sits invisible for months. The CTP Core plugin puts a warning on the Dashboard, Settings → Reading, Business Info and Starter Content screens for as long as it is on, so it is hard to forget.
+
+**When you are ready to launch:**
+
+1. Untick the box in **Settings → Reading** and save.
+2. Confirm it worked — view source on the home page and check that `<meta name="robots" content="noindex, nofollow">` is **gone**.
+3. Then submit to Google Search Console and the sitemap at `https://chicagolandtuckpointing.com/wp-sitemap.xml`. See [SEO-CHECKLIST.md](SEO-CHECKLIST.md).
+
+Submitting to Search Console while the box is still ticked will get the site indexed as "blocked", which takes longer to unwind than doing it in the right order.
 
 ---
 

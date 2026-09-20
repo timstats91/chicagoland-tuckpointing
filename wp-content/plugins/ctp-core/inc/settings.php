@@ -55,6 +55,50 @@ function ctp_settings_schema() {
 }
 
 /**
+ * Remind anyone in the admin that the site is hidden from search engines.
+ *
+ * WordPress does flag this in the Dashboard's At a Glance box, but that is a
+ * single line of grey text on one screen. Discouraging indexing during a build
+ * is the right call; forgetting to undo it at launch is the expensive part, so
+ * this says so plainly on the screens someone actually works in.
+ */
+function ctp_noindex_reminder() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	if ( '0' !== get_option( 'blog_public' ) ) {
+		return;
+	}
+
+	$screen = get_current_screen();
+	$show_on = array( 'dashboard', 'options-reading', 'settings_page_ctp-business-info', 'tools_page_ctp-starter-content' );
+
+	if ( ! $screen || ! in_array( $screen->id, $show_on, true ) ) {
+		return;
+	}
+
+	?>
+	<div class="notice notice-warning">
+		<p>
+			<strong><?php esc_html_e( 'This site is hidden from Google.', 'ctp-core' ); ?></strong>
+			<?php esc_html_e( 'Search engines are being discouraged from indexing it, which is what you want while the content is still being finished.', 'ctp-core' ); ?>
+		</p>
+		<p>
+			<?php
+			printf(
+				/* translators: %s: link to the Reading settings screen. */
+				esc_html__( 'When the site is ready to launch, untick "Discourage search engines" on %s — nothing will rank until you do.', 'ctp-core' ),
+				'<a href="' . esc_url( admin_url( 'options-reading.php' ) ) . '">' . esc_html__( 'Settings → Reading', 'ctp-core' ) . '</a>'
+			);
+			?>
+		</p>
+	</div>
+	<?php
+}
+add_action( 'admin_notices', 'ctp_noindex_reminder' );
+
+/**
  * Add the settings page under Settings.
  */
 function ctp_settings_menu() {

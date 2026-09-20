@@ -332,10 +332,12 @@ function ctp_seed_menus( array $page_ids ) {
 		'primary' => array(
 			'name'  => __( 'Primary Menu', 'ctp-core' ),
 			'items' => array(
-				array( 'title' => __( 'Services', 'ctp-core' ), 'url' => ctp_url( 'services' ) ),
-				array( 'title' => __( 'Service Areas', 'ctp-core' ), 'url' => ctp_url( 'areas' ) ),
+				// "children" expands to every published service, which is what
+				// feeds the Services mega panel. The Areas panel is generated
+				// from the content type, so that item needs no children.
+				array( 'title' => __( 'Services', 'ctp-core' ), 'url' => ctp_url( 'services' ), 'children' => 'ctp_service' ),
+				array( 'title' => __( 'Areas', 'ctp-core' ), 'url' => ctp_url( 'areas' ) ),
 				array( 'title' => __( 'Projects', 'ctp-core' ), 'url' => ctp_url( 'projects' ) ),
-				array( 'title' => __( 'Knowledge Hub', 'ctp-core' ), 'page' => 'knowledge-hub' ),
 				array( 'title' => __( 'About', 'ctp-core' ), 'page' => 'about' ),
 				array( 'title' => __( 'Contact', 'ctp-core' ), 'page' => 'contact' ),
 			),
@@ -363,6 +365,14 @@ function ctp_seed_menus( array $page_ids ) {
 				continue;
 			}
 
+			/*
+			 * Positions are left to WordPress on purpose. menu_order is one
+			 * flat sequence across every level — a parent at 1 with ten
+			 * children fills slots 1 to 11, and the next top-level item starts
+			 * at 12. Inserting in display order gets that right by itself;
+			 * setting positions by hand is how items end up nested inside
+			 * another item's children.
+			 */
 			foreach ( $config['items'] as $item ) {
 				if ( isset( $item['page'] ) ) {
 					if ( ! isset( $page_ids[ $item['page'] ] ) ) {
@@ -383,7 +393,7 @@ function ctp_seed_menus( array $page_ids ) {
 					continue;
 				}
 
-				wp_update_nav_menu_item(
+				$parent_id = wp_update_nav_menu_item(
 					$menu_id,
 					0,
 					array(
@@ -393,6 +403,34 @@ function ctp_seed_menus( array $page_ids ) {
 						'menu-item-status' => 'publish',
 					)
 				);
+
+				if ( empty( $item['children'] ) || is_wp_error( $parent_id ) ) {
+					continue;
+				}
+
+				$children = get_posts(
+					array(
+						'post_type'      => $item['children'],
+						'post_status'    => 'publish',
+						'posts_per_page' => -1,
+						'orderby'        => array( 'menu_order' => 'ASC', 'title' => 'ASC' ),
+					)
+				);
+
+				foreach ( $children as $child ) {
+					wp_update_nav_menu_item(
+						$menu_id,
+						0,
+						array(
+							'menu-item-title'     => get_the_title( $child ),
+							'menu-item-object'    => $child->post_type,
+							'menu-item-object-id' => $child->ID,
+							'menu-item-type'      => 'post_type',
+							'menu-item-parent-id' => (int) $parent_id,
+							'menu-item-status'    => 'publish',
+						)
+					);
+				}
 			}
 		} else {
 			$menu_id = (int) $menu->term_id;
