@@ -86,13 +86,27 @@ add_filter( 'body_class', 'ctp_body_classes' );
 
 /**
  * Honour the per-page noindex flag the seeder sets on the thank-you page.
+ *
+ * Added through the wp_robots filter rather than echoed as its own meta tag,
+ * so it merges into the single tag WordPress already prints. Echoing a second
+ * one produced two conflicting robots tags on that page whenever the site-wide
+ * "discourage search engines" setting was also on.
+ *
+ * Only `noindex` is set. Deliberately nothing about follow/nofollow: while the
+ * site-wide setting is on, WordPress adds `nofollow` too, and overriding that
+ * here would quietly weaken it on this one page.
+ *
+ * @param array<string,bool|string> $robots Robots directives.
+ * @return array<string,bool|string>
  */
-function ctp_noindex() {
+function ctp_noindex( $robots ) {
 	if ( is_singular() && ctp_meta( 'noindex', null, '' ) ) {
-		echo '<meta name="robots" content="noindex, follow" />' . "\n";
+		$robots['noindex'] = true;
 	}
+
+	return $robots;
 }
-add_action( 'wp_head', 'ctp_noindex', 1 );
+add_filter( 'wp_robots', 'ctp_noindex' );
 
 /**
  * Trim excerpts to something that fits a card without clipping mid-word.
